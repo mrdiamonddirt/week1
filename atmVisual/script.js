@@ -23,40 +23,9 @@ let Users = [
     }
 ]
 
-for ( let i=0; i < accounts.length; i++ ){
-    for ( let u=0; u < Users.length; u++ )
-    {
-    if (accounts[i].CID === Users[u].CID) {
-        console.log(`Account Matched ${accounts[i].accNum} ${Users[u].Name} ${accounts[i].balance}`)
-        document.getElementById("customerName").textContent = Users[u].Name
-        document.getElementById("inputAmount").placeholder = "Enter Pin"
-    }
-    }
-}
-
-
 const element1=document.getElementsByClassName("action gray").innerHTML;
-//  var element.innerHTML = "Set Inner!";
-// console.log(document.getElementsByClassName("action gray"));
-
-var element2=document.getElementsByClassName("input").value;
-console.log(document.getElementsByClassName("input"));
-console.log(document.getElementsByClassName("print"));
-var display = document.getElementById("inputAmount").value;
-console.log(document.getElementById("currentBalance").innerHTML= accounts[0].balance,);
-
-//buttons
-// var number1btn = document.getElementById('number1')
-// number1btn.onclick = function() {
-//     document.getElementById('inputAmount').value = document.getElementById('inputAmount').value + 1;
-//     console.log(`button was clicked ${document.getElementById("inputAmount").value + 1}`);
-//     ;
-// };
-
-// var cancelBtn = document.getElementById('cancelBtn');
-// cancelBtn.onclick = function() {
-//     console.log(`button was clicked ${document.getElementById("inputAmount").value = ""}`);
-// };
+console.log(document.getElementById("currentBalance").innerHTML= "Not Logged In",);
+document.getElementById("inputAmount").placeholder = "Enter Account No."
 
 document.getElementById('number0').onclick = function(){
     clickedButton(0);
@@ -101,51 +70,104 @@ document.getElementById('gdp10').onclick = function(){
    clickedButtonAddAmt(10);
 };
 
+// clearing and resetting input
 document.getElementById('cancelBtn').onclick = function(){
     clickedButtonCnl("Cleared");
     setTimeout(() => {
-        clickedButtonCnl("EnterPin");
+        console.log(`${document.getElementById('inputAmount').value}`)
+        //clickedButtonCnl("EnterPin");
         document.getElementById('inputAmount').value = "";
     }, 5000);
     
 };
-
+// cancel button function
 function clickedButtonCnl(buttonPressed){
     document.getElementById('inputAmount').value = buttonPressed;
-    console.log(`button was clicked ${document.getElementById("inputAmount").value} ${buttonPressed}`);
+    console.log(`button was clicked ${document.getElementById("inputAmount").value}`);
 };
 
-function clickedButtonAddAmt(buttonPressed){
-    if (document.getElementById('inputAmount').value == 0 ){
-        console.log("don't Print")
-        document.getElementById("inputAmount").placeholder = "Error"
-        setTimeout(() => {
-            document.getElementById("inputAmount").placeholder = "Enter Pin"
-        }, 2000);
-        // document.getElementById('inputAmount').value = parseInt(document.getElementById('inputAmount').value) + 100;
-        // document.getElementById('inputAmount').value = parseInt(document.getElementById('inputAmount').value) + 100;
-        // document.getElementById('inputAmount').value = parseInt(document.getElementById('inputAmount').value) + 100;
-        // console.log(`button was clicked ${document.getElementById("inputAmount").value} ${buttonPressed}`);
-    } else if (document.getElementById('inputAmount').value !== "0" ){
-        document.getElementById('inputAmount').value = parseInt(document.getElementById('inputAmount').value) + 100;
-        console.log("add value")
+
+
+document.getElementById('confirmBtn').onclick = function(){
+    clickedButtonConf();
+    console.log(`${document.getElementById('inputAmount').value}`)
+ };
+
+var loggedIn = false;
+// confirm button function
+function clickedButtonConf(buttonPressed){
+    console.log(`${buttonPressed}`)
+    // return document.getElementById('inputAmount').value
+    console.log(`${document.getElementById('inputAmount').value}`)
+    for ( let i=0; i < accounts.length; i++ ){
+        for ( let u=0; u < Users.length; u++ ){
+        if (document.getElementById("inputAmount").value == accounts[i].accNum) {
+            console.log(`Account Matched ${accounts[i].accNum} ${Users[u].Name} ${accounts[i].balance}`)
+            document.getElementById("customerName").textContent = Users[u].Name
+            document.getElementById('inputAmount').value = "";
+            document.getElementById('inputAmount').placeholder = "Logging in";
+            loggedIn = true,
+            setTimeout(() => {
+                    document.getElementById('inputAmount').placeholder = `Enter Pin`;
+                }, 2500);
+        } else if (document.getElementById("inputAmount").value !== accounts[i].accNum){
+            console.log("not valid")
+        }
+        }
+    }
+    var pinChecked = false;
+    if (loggedIn == true){
+        console.log("login confirmed")
+        for ( let i=0; i < accounts.length; i++ ){
+                if (document.getElementById("inputAmount").value == accounts[i].pin){
+                    console.log("check pin")
+                    document.getElementById("currentBalance").innerHTML= accounts[i].balance;
+                    console.log("Pin Confirmed")
+                    pinChecked = true;
+                    document.getElementById("inputAmount").value = "";
+                    setTimeout(() => {
+                        document.getElementById("inputAmount").placeholder = "Pin Confirmed";
+                        setTimeout(() => {
+                            document.getElementById("inputAmount").placeholder = `Your Balance is ${accounts[i].balance}`;
+                        }, 2000);
+                    }, 2000);
+                    
+
+                } else {
+                    console.log("incorrect pin")
+                }
+            }
     } else {
+        console.log("Else")
+    }
+    if (loggedIn & pinChecked) {
+        console.log("print")
+    } else {
+        console.log("print2")
+    }
+};
+
+// add amount button function
+function clickedButtonAddAmt(buttonPressed){
+    if (document.getElementById('inputAmount').value == 0 ){ //check if input is equal to nan if so error
+        console.log("there is no value to add to") //log
+        document.getElementById("inputAmount").placeholder = "Error" //
+        setTimeout(() => { //wait
+            document.getElementById("inputAmount").placeholder = "Enter Account Number" //reset placeholder back to Enter Pin
+        }, 2000); //2 seconds
+    } else if (document.getElementById('inputAmount').value !== "0" ){ // if not 0 allow input to be added
+        document.getElementById('inputAmount').value = parseInt(document.getElementById('inputAmount').value) + buttonPressed;
+        console.log("add value")
+    } else { // not needed but here for reference
         console.log("error")
     }
 }; 
 
+// add number to string button function
 function clickedButton(buttonPressed){
     document.getElementById('inputAmount').value += buttonPressed;
     console.log(`button was clicked ${document.getElementById("inputAmount").value}`);
 };
-
-//adds number value to input value
-// var number2btn = document.getElementById('number2')
-// number2btn.onclick = function() {
-//     document.getElementById('inputAmount').value = parseInt(document.getElementById('inputAmount').value) + 2;
-//     // return document.getElementById("inputAmount").value += 2, 
-//     console.log(`button was clicked ${document.getElementById("inputAmount").value}`);
-// };
 
 // Cash Machine
 // The problem
