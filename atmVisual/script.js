@@ -45,24 +45,56 @@ console.log(document.getElementsByClassName("print"));
 var display = document.getElementById("inputAmount").value;
 console.log(document.getElementById("currentBalance").innerHTML= accounts[0].balance,);
 
-var number1btn = document.getElementById('number1')
-number1btn.onclick = function() {
-    document.getElementById('inputAmount').value = document.getElementById('inputAmount').value + 1;
-    console.log(`button was clicked ${document.getElementById("inputAmount").value + 1}`);
-    ;
+//buttons
+// var number1btn = document.getElementById('number1')
+// number1btn.onclick = function() {
+//     document.getElementById('inputAmount').value = document.getElementById('inputAmount').value + 1;
+//     console.log(`button was clicked ${document.getElementById("inputAmount").value + 1}`);
+//     ;
+// };
+
+// var cancelBtn = document.getElementById('cancelBtn');
+// cancelBtn.onclick = function() {
+//     console.log(`button was clicked ${document.getElementById("inputAmount").value = ""}`);
+// };
+
+document.getElementById('number0').onclick = function(){
+    clickedButton(0);
+};
+document.getElementById('number1').onclick = function(){
+    clickedButton(1);
+};
+document.getElementById('number2').onclick = function(){
+    clickedButton(2);
+};
+document.getElementById('number3').onclick = function(){
+    clickedButton(3);
+};
+document.getElementById('number4').onclick = function(){
+    clickedButton(4);
+};
+document.getElementById('number5').onclick = function(){
+    clickedButton(5);
+};
+document.getElementById('number6').onclick = function(){
+    clickedButton(6);
+};
+document.getElementById('number7').onclick = function(){
+    clickedButton(7);
+};
+document.getElementById('number8').onclick = function(){
+    clickedButton(8);
+};
+document.getElementById('number9').onclick = function(){
+    clickedButton(9);
 };
 
-var cancelBtn = document.getElementById('cancelBtn');
-cancelBtn.onclick = function() {
-    console.log(`button was clicked ${document.getElementById("inputAmount").value = ""}`);
-};
-
-var number2btn = document.getElementById('number2')
-number2btn.onclick = function() {
-    document.getElementById('inputAmount').value = document.getElementById('inputAmount').value + 2;
-    // return document.getElementById("inputAmount").value += 2, 
+function clickedButton(buttonPressed){
+    document.getElementById('inputAmount').value = document.getElementById('inputAmount').value + buttonPressed;
     console.log(`button was clicked ${document.getElementById("inputAmount").value}`);
-};
+    console.log();
+}
+
 
 //adds number value to input value
 // var number2btn = document.getElementById('number2')
