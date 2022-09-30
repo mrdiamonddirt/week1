@@ -60,10 +60,15 @@ function withdraw(accountNum, amountReq, pin) {
     // remove money from account
   }
 }
-withdraw(1234, 2000, 1111);
+
+
+setTimeout(() => {
+  withdraw(1234, 2000, 1111);
 console.log(error(`
     should return wrong account number
 `));
+}, 5000);
+
 withdraw(6786575, 2000, 1111);
 console.log(error(`
     should return incorrect pin

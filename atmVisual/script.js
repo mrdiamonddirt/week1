@@ -1,18 +1,39 @@
-let accounts = {
-    accNum:[
-    12345678,
-    12452321,
-    ],
-    CID:[
-    "ab12345678",
-    ],
-    balance:[
-    100000,
-    ],
-    pin:[
-    1234,
-    ]
+let accounts = [
+    {
+    accNum:12345678,
+    CID: "ab12345678",
+    balance: 5000,
+    pin: 1234,
+    },
+    {
+    accNum:12345680,
+    CID: "ab12345678",
+    balance: 1000,
+    pin: 1234,
+    }
+];
+let Users = [
+    {
+        Name: "John",
+        CID: "ab12345678",
+    },
+    {
+        Name: "Rowan",
+        CID: "ab12345680",
+    }
+]
+
+for ( let i=0; i < accounts.length; i++ ){
+    for ( let u=0; u < Users.length; u++ )
+    {
+    if (accounts[i].CID === Users[u].CID) {
+        console.log(`Account Matched ${accounts[i].accNum} ${Users[u].Name} ${accounts[i].balance}`)
+        document.getElementById("customerName").textContent = Users[u].Name
+        document.getElementById("inputAmount").placeholder = "Enter Pin"
+    }
+    }
 }
+
 
 const element1=document.getElementsByClassName("action gray").innerHTML;
 //  var element.innerHTML = "Set Inner!";
@@ -22,25 +43,34 @@ var element2=document.getElementsByClassName("input").value;
 console.log(document.getElementsByClassName("input"));
 console.log(document.getElementsByClassName("print"));
 var display = document.getElementById("inputAmount").value;
-console.log(document.getElementById("currentBalance").innerHTML= accounts.balance[0],);
+console.log(document.getElementById("currentBalance").innerHTML= accounts[0].balance,);
 
 var number1btn = document.getElementById('number1')
 number1btn.onclick = function() {
-    console.log(`button was clicked ${document.getElementById("inputAmount").value++}`);
+    document.getElementById('inputAmount').value = document.getElementById('inputAmount').value + 1;
+    console.log(`button was clicked ${document.getElementById("inputAmount").value + 1}`);
     ;
 };
 
 var cancelBtn = document.getElementById('cancelBtn');
 cancelBtn.onclick = function() {
-    console.log(`button was clicked ${document.getElementById("inputAmount").value = 0}`);
+    console.log(`button was clicked ${document.getElementById("inputAmount").value = ""}`);
 };
 
 var number2btn = document.getElementById('number2')
 number2btn.onclick = function() {
     document.getElementById('inputAmount').value = document.getElementById('inputAmount').value + 2;
     // return document.getElementById("inputAmount").value += 2, 
-    console.log(`button was clicked ${document.getElementById("inputAmount").value += 2 }`);
+    console.log(`button was clicked ${document.getElementById("inputAmount").value}`);
 };
+
+//adds number value to input value
+// var number2btn = document.getElementById('number2')
+// number2btn.onclick = function() {
+//     document.getElementById('inputAmount').value = parseInt(document.getElementById('inputAmount').value) + 2;
+//     // return document.getElementById("inputAmount").value += 2, 
+//     console.log(`button was clicked ${document.getElementById("inputAmount").value}`);
+// };
 
 // Cash Machine
 // The problem
