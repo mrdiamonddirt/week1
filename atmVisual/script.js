@@ -88,12 +88,19 @@ document.getElementById('number8').onclick = function(){
 document.getElementById('number9').onclick = function(){
     clickedButton(9);
 };
+document.getElementById('gdp100').onclick = function(){
+    clickedButtonAddAmt(100);
+};
+
+function clickedButtonAddAmt(buttonPressed){
+    document.getElementById('inputAmount').value + buttonPressed;
+    console.log(`button was clicked ${document.getElementById("inputAmount").value} ${buttonPressed}`);
+};
 
 function clickedButton(buttonPressed){
     document.getElementById('inputAmount').value += buttonPressed;
     console.log(`button was clicked ${document.getElementById("inputAmount").value}`);
-}
-
+};
 
 //adds number value to input value
 // var number2btn = document.getElementById('number2')
