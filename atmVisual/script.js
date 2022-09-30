@@ -91,11 +91,48 @@ document.getElementById('number9').onclick = function(){
 document.getElementById('gdp100').onclick = function(){
     clickedButtonAddAmt(100);
 };
+document.getElementById('gdp50').onclick = function(){
+   clickedButtonAddAmt(50);
+};
+document.getElementById('gdp20').onclick = function(){
+   clickedButtonAddAmt(20);
+};
+document.getElementById('gdp10').onclick = function(){
+   clickedButtonAddAmt(10);
+};
 
-function clickedButtonAddAmt(buttonPressed){
-    document.getElementById('inputAmount').value + buttonPressed;
+document.getElementById('cancelBtn').onclick = function(){
+    clickedButtonCnl("Cleared");
+    setTimeout(() => {
+        clickedButtonCnl("EnterPin");
+        document.getElementById('inputAmount').value = "";
+    }, 5000);
+    
+};
+
+function clickedButtonCnl(buttonPressed){
+    document.getElementById('inputAmount').value = buttonPressed;
     console.log(`button was clicked ${document.getElementById("inputAmount").value} ${buttonPressed}`);
 };
+
+function clickedButtonAddAmt(buttonPressed){
+    if (document.getElementById('inputAmount').value == 0 ){
+        console.log("don't Print")
+        document.getElementById("inputAmount").placeholder = "Error"
+        setTimeout(() => {
+            document.getElementById("inputAmount").placeholder = "Enter Pin"
+        }, 2000);
+        // document.getElementById('inputAmount').value = parseInt(document.getElementById('inputAmount').value) + 100;
+        // document.getElementById('inputAmount').value = parseInt(document.getElementById('inputAmount').value) + 100;
+        // document.getElementById('inputAmount').value = parseInt(document.getElementById('inputAmount').value) + 100;
+        // console.log(`button was clicked ${document.getElementById("inputAmount").value} ${buttonPressed}`);
+    } else if (document.getElementById('inputAmount').value !== "0" ){
+        document.getElementById('inputAmount').value = parseInt(document.getElementById('inputAmount').value) + 100;
+        console.log("add value")
+    } else {
+        console.log("error")
+    }
+}; 
 
 function clickedButton(buttonPressed){
     document.getElementById('inputAmount').value += buttonPressed;
