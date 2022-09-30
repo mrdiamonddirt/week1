@@ -90,9 +90,8 @@ document.getElementById('number9').onclick = function(){
 };
 
 function clickedButton(buttonPressed){
-    document.getElementById('inputAmount').value = document.getElementById('inputAmount').value + buttonPressed;
+    document.getElementById('inputAmount').value += buttonPressed;
     console.log(`button was clicked ${document.getElementById("inputAmount").value}`);
-    console.log();
 }
 
 
